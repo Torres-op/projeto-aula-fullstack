@@ -13,48 +13,48 @@ class Livro(models.Model):
 class Acervo(models.Model):
 
     class Type(models.TextChoices):
-        DIGITAL = "D1"
-        FISICO = "F2"
+        DIGITAL = "D1", _("Digital")
+        FISICO = "F2", _("Físico")
 
     class Category(models.IntegerChoices):
         GENERALIDADES_E_INFORMACOES = 0, _(
-            "Generalidades e Informação: Obras gerais, enciclopédias, jornais e biblioteconomia."
+            "000 – Generalidades e Informação: Obras gerais, enciclopédias, jornais e biblioteconomia."
         )
 
         FILOSOFIA_E_PSICOLOGIA = 100, _(
-            "Filosofia e Psicologia: Ética, lógica e investigações sobre a mente humana."
+            "100 – Filosofia e Psicologia: Ética, lógica e investigações sobre a mente humana."
         )
 
-        RELIGIAO_E_TECNOLOGIA = 200, _(
-            "Religião e Teologia: Mitologia, teologia e estudos sobre crenças e religiões."
+        RELIGIAO_E_TEOLOGIA = 200, _(
+            "200 – Religião e Teologia: Mitologia, teologia e estudos sobre crenças e religiões."
         )
 
         CIENCIAS_SOCIAIS_E_DIREITO = 300, _(
-            "Ciências Sociais e Direito: Política, economia, sociologia, educação e leis."
+            "300 – Ciências Sociais e Direito: Política, economia, sociologia, educação e leis."
         )
 
         LINGUISTICA_E_IDIOMAS = 400, _(
-            "Linguística e Idiomas: Gramáticas, dicionários e estudos de línguas."
+            "400 – Linguística e Idiomas: Gramáticas, dicionários e estudos de línguas."
         )
 
         CIENCIAS_PURAS = 500, _(
-            "Ciências Puras (Exatas e Naturais): Matemática, física, química, biologia e astronomia."
+            "500 – Ciências Puras (Exatas e Naturais): Matemática, física, química, biologia e astronomia."
         )
 
         CIENCIAS_APLICADAS = 600, _(
-            "Ciências Aplicadas (Tecnologia): Medicina, engenharia, agricultura e administração."
+            "600 – Ciências Aplicadas (Tecnologia): Medicina, engenharia, agricultura e administração."
         )
 
         ARTES_E_RECREACAO = 700, _(
-            "Artes e Recreação: Pintura, música, arquitetura, esportes e lazer."
+            "700 – Artes e Recreação: Pintura, música, arquitetura, esportes e lazer."
         )
 
         LITERATURA = 800, _(
-            "Literatura: Poesia, romances, contos, crônicas e crítica literária."
+            "800 – Literatura: Poesia, romances, contos, crônicas e crítica literária."
         )
 
         HISTORIA_E_GEOGRAFIA = 900, _(
-            "História e Geografia: Biografias, viagens e acontecimentos históricos."
+            "900 – História e Geografia: Biografias, viagens e acontecimentos históricos."
         )
 
 
@@ -72,4 +72,7 @@ class Acervo(models.Model):
         default=Type.DIGITAL,
         verbose_name="Tipo"
     )
+
+    def __str__(self):
+        return f"{self.get_tipo_display()} - {self.get_categoria_display()}"
 
