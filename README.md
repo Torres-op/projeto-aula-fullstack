@@ -44,14 +44,10 @@ Os acervos podem ser pesquisados por nome do livro, tipo e categoria.
 
 3. Crie um banco de dados vazio no PostgreSQL.
 
-4. Crie um arquivo `.env` na raiz do projeto com os dados do banco:
+4. Copie o arquivo de exemplo e preencha com os dados do banco:
 
-   ```
-   SECRET_KEY=uma-chave-secreta-qualquer
-   DB_NAME=nome_do_banco
-   DB_USER=usuario
-   DB_PASSWORD=senha
-   DB_HOST=localhost
+   ```powershell
+   copy .env.example .env
    ```
 
 5. Crie as tabelas no banco:
@@ -71,6 +67,28 @@ Os acervos podem ser pesquisados por nome do livro, tipo e categoria.
    ```powershell
    python manage.py runserver
    ```
+
+## Como rodar com Docker
+
+Com o Docker não é preciso instalar o Python nem o PostgreSQL: o `docker-compose.yml` sobe o banco e o projeto juntos.
+
+1. Crie o arquivo `.env` como no passo 4 acima. O banco é criado com esses dados na primeira vez que o projeto sobe.
+
+2. Suba o projeto. As tabelas são criadas automaticamente:
+
+   ```powershell
+   docker compose up --build
+   ```
+
+3. Para criar um usuário do admin, abra outro terminal e rode:
+
+   ```powershell
+   docker compose exec web python manage.py createsuperuser
+   ```
+
+4. Para parar, aperte `Ctrl+C` ou rode `docker compose down`. Os dados do banco continuam salvos para a próxima vez. Para apagar o banco também, rode `docker compose down -v`.
+
+As alterações no código aparecem sem precisar subir o projeto de novo.
 
 ## Páginas
 
