@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1>Acervos</h1>
+
 <form method="GET">
 
     <div>
@@ -55,3 +61,23 @@
     </a>
 
 </form>
+
+<ul>
+    {% for acervo in acervos %}
+        <li>
+            {{ acervo.get_tipo_display }} — {{ acervo.get_categoria_display }}
+
+            <ul>
+                {% for livro in acervo.livro.all %}
+                    <li>{{ livro.titulo }} — {{ livro.autor }}</li>
+                {% empty %}
+                    <li>Nenhum livro neste acervo.</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% empty %}
+        <li>Nenhum acervo encontrado.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

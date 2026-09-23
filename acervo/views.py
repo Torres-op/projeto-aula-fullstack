@@ -34,7 +34,7 @@ def listar_acervo(request):
     if tipo:
         acervos = acervos.filter(tipo=tipo)
 
-    if categoria:
+    if categoria.isdigit():
         acervos = acervos.filter(categoria=categoria)
 
     acervos = acervos.distinct()
