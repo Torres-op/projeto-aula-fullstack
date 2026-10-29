@@ -1,4 +1,5 @@
-from django.urls import path
+from django.contrib import admin
+from django.urls import include, path
 from . import views
 
 urlpatterns = [
@@ -17,4 +18,13 @@ urlpatterns = [
         views.listar_acervo,
         name='listar_acervo'
     ),
+    path(
+        'admin/', 
+        admin.site.urls
+    ),
+    path(
+        'api/', 
+        include('acervo.api_urls')
+    ),
+
 ]
